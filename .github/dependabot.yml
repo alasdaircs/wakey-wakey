@@ -1,0 +1,22 @@
+# Dependabot: one grouped pull request a week per ecosystem, stable versions
+# only (its default). The build workflow checks each one (issue #1).
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directories:
+      - "/**"
+    schedule:
+      interval: weekly
+    groups:
+      nuget:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
