@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    # WinForms on net10.0-windows: build on Windows.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore WakeyWakey.sln
+
+      - name: Build
+        run: dotnet build WakeyWakey.sln --configuration Release --no-restore
+
+      # There are no test projects yet; this runs any that are added.
+      - name: Test
+        run: dotnet test WakeyWakey.sln --configuration Release --no-build
+
+      - name: Publish (single-file check)
+        run: dotnet publish WakeyWakey/WakeyWakey.csproj --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true
