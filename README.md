@@ -32,7 +32,7 @@ When deactivated the flags are cleared with `ES_CONTINUOUS` alone, restoring the
 ## Requirements
 
 - Windows 10 or Windows 11
-- [.NET 10 Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (Desktop / Windows)
+- [.NET 11 Runtime](https://dotnet.microsoft.com/download/dotnet/11.0) (Desktop / Windows)
 
 ---
 
@@ -72,7 +72,7 @@ The output `.exe` will be in `WakeyWakey/bin/Release/net10.0-windows/win-x64/pub
 ```
 WakeyWakey.sln
 └── WakeyWakey/
-    ├── WakeyWakey.csproj          — net10.0-windows WinExe
+    ├── WakeyWakey.csproj          — net11.0-windows WinExe
     ├── Program.cs                  — STAThread entry point
     ├── PowerManager.cs             — SetThreadExecutionState wrapper
     └── TrayApplicationContext.cs   — tray icon, menus, timer, icon renderer
